@@ -1,6 +1,6 @@
 ﻿using LiteraryRecommendation.Api.Core.Identity;
 
-namespace LiteraryRecommendation.Authentication.Configuration
+namespace LiteraryRecommendation.Books.Api.Configuration
 {
     public static class ApiConfig
     {

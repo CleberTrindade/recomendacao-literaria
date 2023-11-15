@@ -10,7 +10,7 @@ namespace LiteraryRecommendation.Api.Core.Identity
 {
     public static class JwtConfig
     {
-        public static IServiceCollection AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
 
             var appSettingsSection = configuration.GetSection("AppSettings");
@@ -19,15 +19,15 @@ namespace LiteraryRecommendation.Api.Core.Identity
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
-            services.AddAuthentication(options =>
+            services.AddAuthentication(x =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(bearerOptions =>
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
             {
-                bearerOptions.RequireHttpsMetadata = true;
-                bearerOptions.SaveToken = true;
-                bearerOptions.TokenValidationParameters = new TokenValidationParameters
+                x.RequireHttpsMetadata = true;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
@@ -37,16 +37,12 @@ namespace LiteraryRecommendation.Api.Core.Identity
                     ValidIssuer = appSettings.Issuer
                 };
             });
-
-            return services;
         }
 
-        public static WebApplication UseJwtConfiguration(this WebApplication app)
+        public static void UseAuthConfiguration(this WebApplication app)
         {
             app.UseAuthorization();
             app.UseAuthentication();
-
-            return app;
         }
     }
 }

@@ -7,13 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Identity\ClaimsAuthorizeAttribute.cs" />
-    <Compile Remove="Identity\RequisitoClaimsFilter.cs" />
+    <ProjectReference Include="..\LiteraryRecommendation.Core\LiteraryRecommendation.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.24" />
+    <Folder Include="Models\" />
   </ItemGroup>
-
 
 </Project>

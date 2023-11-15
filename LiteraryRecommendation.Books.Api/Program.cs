@@ -1,12 +1,11 @@
-
-using LiteraryRecommendation.Authentication.Configuration;
+using LiteraryRecommendation.Books.Api.Configuration;
+using LiteraryRecommendation.Api.Core.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddIdentityConfiguration(builder.Configuration);
 builder.Services.AddSwaggerConfiguration();
+builder.Services.AddJwtConfiguration(builder.Configuration);
 builder.Services.AddApiConfiguration();
-
 
 var app = builder.Build();
 
